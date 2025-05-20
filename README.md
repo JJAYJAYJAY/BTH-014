@@ -1,5 +1,10 @@
 # BTH-014
 
+## Introduce
+
+本项目测试Linux、mac与win主流操作系统下的Python3.8、3.9、3.10、3.11、3.12版本的pickle模块的序列化与反序列化功能。  
+本项目使用conda环境进行不同版本下的管理测试。
+
 ## Project Structure
 
 ```
@@ -16,4 +21,7 @@
 │   ├── fuzz    
 │   ├── main  
 │   ├── README.md
+│   ├── main-win.bat //win下的测试脚本
+│   ├── main-linux.sh //linux与mac下的测试脚本
 ```
+

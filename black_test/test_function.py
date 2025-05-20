@@ -1,35 +1,43 @@
-import unittest
-import pickle
 import hashlib
+import pickle
+import unittest
 
 
-class TestContainer(unittest.TestCase):
-    def test_list(self):
-        a = [1,'a',3,4,5,6]
+
+def function1():
+    print('hello world')
+
+def function2(x:int) -> int:
+    return x+1
+
+def function3(x:int) -> bool:
+    return x>1 and x<100
+
+def function4(x:int):
+    if x<100:
+        function4(x+1)
+        
+class TestFunction(unittest.TestCase):
+    def test_function1(self):
+        a = function1
         a_pickle1 = pickle.dumps(a)
         a_pickle2 = pickle.dumps(a)
         assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
 
-    def test_tuple(self):
-        a = (1,2,'*',43,'1')
+    def test_function2(self):
+        a = function2
         a_pickle1 = pickle.dumps(a)
         a_pickle2 = pickle.dumps(a)
         assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
 
-    def test_dict(self):
-        a = {'name':'Alice','age':21}
+    def test_function3(self):
+        a = function3
         a_pickle1 = pickle.dumps(a)
         a_pickle2 = pickle.dumps(a)
         assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
 
-    def test_set(self):
-        a = {'a',1,3}
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
-
-    def test_frozenset(self):
-        a = frozenset(['a',1,3])
+    def test_function4(self):
+        a = function4
         a_pickle1 = pickle.dumps(a)
         a_pickle2 = pickle.dumps(a)
         assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())

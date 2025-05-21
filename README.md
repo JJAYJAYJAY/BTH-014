@@ -1,12 +1,70 @@
-# BTH-014
+# BTH-014（English Version）
+## introduction
+This project tests the serialization functionality of the `pickle` module under mainstream operating systems including **Linux**, **macOS**, and **Windows**, using Python versions **3.6**, **3.9**, and **3.11**.  
+This project uses **conda environments** to manage and test different Python versions.  
+`lib_pickle` contains the source code of the `pickle` module, and `pickle.py` is the main file of the module.
 
-## Introduce
+In this `pickle` library, the original C implementation call (original lines 1776–1790):
 
-本项目测试Linux、mac与win主流操作系统下的Python3.8、3.9、3.10、3.11、3.12版本的pickle模块的序列化功能。  
-本项目使用conda环境进行不同版本下的管理测试。  
-项目仅仅测试序列化模块的dump与dumps功能，故将源文件的load与loads功能删除。
+```python
+try:
+    from _pickle import (
+        PickleError,
+        PicklingError,
+        UnpicklingError,
+        Pickler,
+        Unpickler,
+        dump,
+        dumps,
+        load,
+        loads
+    )
+except ImportError:
+    Pickler, Unpickler = _Pickler, _Unpickler
+    dump, dumps, load, loads = _dump, _dumps, _load, _loads
+```
+is replaced with the current implementation (lines 1107–1108):
+```python
+Pickler = _Pickler
+dump, dumps = _dump, _dumps
+```
+The project only tests the `dump` and `dumps` functions of the serialization module, so the `load` and `loads` functions have been removed from the `pickle` source file.
 
-## Project Structure
+    
+
+
+# BTH-014（中文版本）
+## 介绍
+
+本项目在主流操作系统**Linux**、**macOS**和**Windows**下，使用Python版本**3.6**、**3.9**和**3.11**测试`pickle`模块的序列化功能。
+本项目使用**conda环境**来管理和测试不同的Python版本。
+`lib_pickle`包含`pickle`模块的源代码，`pickle.py`是该模块的主文件。
+在这个`pickle`库中，原始的C实现调用（原始行1776-1790）：
+```python
+try:
+    from _pickle import (
+        PickleError,
+        PicklingError,
+        UnpicklingError,
+        Pickler,
+        Unpickler,
+        dump,
+        dumps,
+        load,
+        loads
+    )
+except ImportError:
+    Pickler, Unpickler = _Pickler, _Unpickler
+    dump, dumps, load, loads = _dump, _dumps, _load, _loads
+```
+替换为现文件(1107-1108)
+```python
+Pickler = _Pickler
+dump, dumps, = _dump, _dumps
+```
+本项目仅测试序列化模块的`dump`和`dumps`函数，因此已从`pickle`源文件中删除了`load`和`loads`函数。
+
+## 项目结构
 
 ```
 ├── BTH-014
@@ -25,4 +83,6 @@
 │   ├── main-win.bat //win下的测试脚本
 │   ├── main-linux.sh //linux与mac下的测试脚本
 ```
+## 使用方法
+
 

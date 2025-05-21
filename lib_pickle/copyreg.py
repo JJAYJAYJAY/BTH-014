@@ -9,6 +9,7 @@ __all__ = ["pickle", "constructor",
 
 dispatch_table = {}
 
+
 def pickle(ob_type, pickle_function, constructor_ob=None):
     if not callable(pickle_function):
         raise TypeError("reduction functions must be callable")
@@ -19,9 +20,11 @@ def pickle(ob_type, pickle_function, constructor_ob=None):
     if constructor_ob is not None:
         constructor(constructor_ob)
 
+
 def constructor(object):
     if not callable(object):
         raise TypeError("constructors must be callable")
+
 
 # Example: provide pickling support for complex numbers.
 
@@ -34,13 +37,17 @@ else:
     def pickle_complex(c):
         return complex, (c.real, c.imag)
 
+
     pickle(complex, pickle_complex, complex)
+
 
 def pickle_union(obj):
     import functools, operator
     return functools.reduce, (operator.or_, obj.__args__)
 
+
 pickle(type(int | str), pickle_union)
+
 
 # Support for pickling new-style objects
 
@@ -53,8 +60,10 @@ def _reconstructor(cls, base, state):
             base.__init__(obj, state)
     return obj
 
-_HEAPTYPE = 1<<9
+
+_HEAPTYPE = 1 << 9
 _new_type = type(int.__new__)
+
 
 # Python code for object.__reduce_ex__ for protocols 0 and 1
 
@@ -68,7 +77,7 @@ def _reduce_ex(self, proto):
         if isinstance(new, _new_type) and new.__self__ is base:
             break
     else:
-        base = object # not really reachable
+        base = object  # not really reachable
     if base is object:
         state = None
     else:
@@ -95,16 +104,19 @@ def _reduce_ex(self, proto):
     else:
         return _reconstructor, args
 
+
 # Helper for __reduce_ex__ protocol 2
 
 def __newobj__(cls, *args):
     return cls.__new__(cls, *args)
+
 
 def __newobj_ex__(cls, args, kwargs):
     """Used by lib_pickle protocol 4, instead of __newobj__ to allow classes with
     keyword-only arguments to be pickled correctly.
     """
     return cls.__new__(cls, *args, **kwargs)
+
 
 def _slotnames(cls):
     """Return a list of slot names for a given class.
@@ -153,9 +165,10 @@ def _slotnames(cls):
     try:
         cls.__slotnames__ = names
     except:
-        pass # But don't die if we can't
+        pass  # But don't die if we can't
 
     return names
+
 
 # A registry of extension codes.  This is an ad-hoc compression
 # mechanism.  Whenever a global reference to <module>, <name> is about
@@ -166,9 +179,11 @@ def _slotnames(cls):
 # don't have this restriction.)  Codes are positive ints; 0 is
 # reserved.
 
-_extension_registry = {}                # key -> code
-_inverted_registry = {}                 # code -> key
-_extension_cache = {}                   # code -> object
+_extension_registry = {}  # key -> code
+_inverted_registry = {}  # code -> key
+_extension_cache = {}  # code -> object
+
+
 # Don't ever rebind those names:  pickling grabs a reference to them when
 # it's initialized, and won't see a rebinding.
 
@@ -179,8 +194,8 @@ def add_extension(module, name, code):
         raise ValueError("code out of range")
     key = (module, name)
     if (_extension_registry.get(key) == code and
-        _inverted_registry.get(code) == key):
-        return # Redundant registrations are benign
+            _inverted_registry.get(code) == key):
+        return  # Redundant registrations are benign
     if key in _extension_registry:
         raise ValueError("key %s is already registered with code %s" %
                          (key, _extension_registry[key]))
@@ -190,17 +205,19 @@ def add_extension(module, name, code):
     _extension_registry[key] = code
     _inverted_registry[code] = key
 
+
 def remove_extension(module, name, code):
     """Unregister an extension code.  For testing only."""
     key = (module, name)
     if (_extension_registry.get(key) != code or
-        _inverted_registry.get(code) != key):
+            _inverted_registry.get(code) != key):
         raise ValueError("key %s is not registered with code %s" %
                          (key, code))
     del _extension_registry[key]
     del _inverted_registry[code]
     if code in _extension_cache:
         del _extension_cache[code]
+
 
 def clear_extension_cache():
     _extension_cache.clear()

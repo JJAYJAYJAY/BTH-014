@@ -1,10 +1,11 @@
 import hashlib
 import json
-from lib_pickle import pickle
 import unittest
 from collections import Counter, OrderedDict, defaultdict, deque, namedtuple
 from datetime import datetime
 from pathlib import Path
+
+from lib_pickle import pickle
 
 
 class TestMoudle(unittest.TestCase):

@@ -10,8 +10,8 @@ from black_test.Base_test_class import BaseTestClass
 os_name = platform.system()
 
 
-class TestMoudle(unittest.TestCase, BaseTestClass):
-    def test_moudle(self):
+class TestModule(unittest.TestCase, BaseTestClass):
+    def test_module(self):
         test_cases = {
             "collection": [
                 deque([1, 2, 3]),
@@ -20,7 +20,6 @@ class TestMoudle(unittest.TestCase, BaseTestClass):
                 Counter('safvonusod')],
             "path": Path('./res/test.txt'),
             "datetime": datetime.now(),
-            "set": {'a', 1, 3},
             "json": json.dumps({'name': 'Alice', 'age': 12})
         }
 

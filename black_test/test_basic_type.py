@@ -12,7 +12,7 @@ class TestBasicType(unittest.TestCase, BaseTestClass):
         test_cases = {
             "int": 1,
             "float": 1.0,
-            "high_float": random.uniform(1.0, 1000000.0),
+            "high_float": 1.234567890123456789123456789012345678921321986874601,
             "str": "hello",
             "byte": b"hello",
             "None": None,

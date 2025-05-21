@@ -12,7 +12,7 @@ class Person:
         self.age = age
 
     def greet(self):
-        return f"你好，我叫{self.name}，今年{self.age}岁。"
+        return f"Hello, my name is{self.name}，I'm {self.age} years old."
 
     def __str__(self):
         return f"Person(name='{self.name}', age={self.age})"
@@ -43,25 +43,25 @@ class Animal:
         self.name = name
 
     def speak(self):
-        raise NotImplementedError("子类必须实现此方法")
+        raise NotImplementedError("subclass must implement this method")
 
 
 class Dog(Animal):
 
     def speak(self):
-        return f"{self.name}说：汪汪！"
+        return f"{self.name}says:wolf wolf"
 
     def fetch(self, item: str):
-        return f"{self.name}叼回了{item}"
+        return f"{self.name}take back {item}"
 
 
 class Cat(Animal):
 
     def speak(self):
-        return f"{self.name}说：喵喵"
+        return f"{self.name}says:meow meow"
 
     def knock_over(self, item: str):
-        return f"{self.name}把{item}扑倒了"
+        return f"{self.name}knocks over {item}"
 
 
 class BankAccount:
@@ -80,12 +80,12 @@ class BankAccount:
 
     def deposit(self, amount: float):
         if amount <= 0:
-            raise ValueError("存款金额必须为正数")
+            raise ValueError("The deposit amount must be positive")
         self._balance += amount
 
     def withdraw(self, amount: float):
         if amount <= 0:
-            raise ValueError("取款金额必须为正数")
+            raise ValueError("The withdrawal amount must be positive")
         if amount > self._balance:
             return False
         self._balance -= amount

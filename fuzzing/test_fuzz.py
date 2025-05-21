@@ -1,13 +1,12 @@
 import hashlib
 import platform
-import random
-import sys
 import unittest
-from generate_data import GenerateData
 
+from generate_data import GenerateData
 from lib_pickle import pickle
 
 os_name = platform.system()
+
 
 class TestFuzz(unittest.TestCase):
     def test_fuzz(self):

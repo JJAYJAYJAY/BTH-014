@@ -1,7 +1,6 @@
 import hashlib
 import platform
 import random
-import sys
 import unittest
 
 from lib_pickle import pickle

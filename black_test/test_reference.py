@@ -14,10 +14,10 @@ def generator():
 class TestReference(unittest.TestCase):
     def test_reference(self):
         test_cases = {
-            "reference" : generator(),
+            "reference": generator(),
         }
 
-        for name,val in test_cases.items():
+        for name, val in test_cases.items():
             with self.subTest(name=name):
                 with open(f"res/test_{name}_write.pkl", "wb") as f:
                     pickle.dump(val, f)
@@ -26,6 +26,7 @@ class TestReference(unittest.TestCase):
                         hashlib.sha256(pickle.dumps(val)).hexdigest(),
                         hashlib.sha256(f.read()).hexdigest()
                     )
+
 
 if __name__ == '__main__':
     unittest.main()

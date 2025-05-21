@@ -1,8 +1,11 @@
 # BTH-014（English Version）
-## introduction
-This project tests the serialization functionality of the `pickle` module under mainstream operating systems including **Linux**, **macOS**, and **Windows**, using Python versions **3.6**, **3.9**, and **3.11**.  
 
-This project uses **conda environments** to manage and test different Python versions.  
+## introduction
+
+This project tests the serialization functionality of the `pickle` module under mainstream operating systems including *
+*Linux**, **macOS**, and **Windows**, using Python versions **3.6**, **3.9**, and **3.11**.
+
+This project uses **conda environments** to manage and test different Python versions.
 
 `lib_pickle` contains the source code of the `pickle` module, and `pickle.py` is the main file of the module.
 
@@ -25,17 +28,19 @@ except ImportError:
     Pickler, Unpickler = _Pickler, _Unpickler
     dump, dumps, load, loads = _dump, _dumps, _load, _loads
 ```
+
 is replaced with the current implementation (lines 1107–1108):
+
 ```python
 Pickler = _Pickler
 dump, dumps = _dump, _dumps
 ```
-The project only tests the `dump` and `dumps` functions of the serialization module, so the `load` and `loads` functions have been removed from the `pickle` source file.
 
-    
-
+The project only tests the `dump` and `dumps` functions of the serialization module, so the `load` and `loads` functions
+have been removed from the `pickle` source file.
 
 # BTH-014（中文版本）
+
 ## 介绍
 
 本项目在主流操作系统**Linux**、**macOS**和**Windows**下，使用Python版本**3.6**、**3.9**和**3.11**测试`pickle`模块的序列化功能。
@@ -45,6 +50,7 @@ The project only tests the `dump` and `dumps` functions of the serialization mod
 `lib_pickle`包含`pickle`模块的源代码，`pickle.py`是该模块的主文件。
 
 在这个`pickle`库中，原始的C实现调用（原始行1776-1790）：
+
 ```python
 try:
     from _pickle import (
@@ -62,11 +68,14 @@ except ImportError:
     Pickler, Unpickler = _Pickler, _Unpickler
     dump, dumps, load, loads = _dump, _dumps, _load, _loads
 ```
+
 替换为现文件(1107-1108)
+
 ```python
 Pickler = _Pickler
 dump, dumps, = _dump, _dumps
 ```
+
 本项目仅测试序列化模块的`dump`和`dumps`函数，因此已从`pickle`源文件中删除了`load`和`loads`函数。
 
 ## 项目结构
@@ -96,6 +105,7 @@ dump, dumps, = _dump, _dumps
 │   ├── tool
 │   ├── README.md
 ```
+
 ## 使用方法
 
 

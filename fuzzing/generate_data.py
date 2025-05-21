@@ -1,6 +1,7 @@
 import random
 import string
 
+
 class GenerateData:
     def __init__(self, seed=None):
         self.seed = seed

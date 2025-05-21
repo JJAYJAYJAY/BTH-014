@@ -93,13 +93,13 @@ class BankAccount:
 class TestCustomerClass(unittest.TestCase):
     def test_customer_class(self):
         test_cases = {
-            "person" : Person('Alice',19),
+            "person": Person('Alice', 19),
             "mathutil": MathUtils,
             "animal": [Dog('ww'), Cat('mm')],
-            "bankcount":BankAccount('Bob', 0),
+            "bankcount": BankAccount('Bob', 0),
         }
 
-        for name,val in test_cases.items():
+        for name, val in test_cases.items():
             with self.subTest(name=name):
                 with open(f"res/test_{name}_write.pkl", "wb") as f:
                     pickle.dump(val, f)
@@ -108,6 +108,7 @@ class TestCustomerClass(unittest.TestCase):
                         hashlib.sha256(pickle.dumps(val)).hexdigest(),
                         hashlib.sha256(f.read()).hexdigest()
                     )
+
 
 if __name__ == '__main__':
     unittest.main()

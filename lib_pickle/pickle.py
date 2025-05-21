@@ -28,13 +28,12 @@ import codecs
 import io
 import re
 import sys
+from copyreg import _extension_registry
+from copyreg import dispatch_table
 from functools import partial
 from itertools import islice
 from struct import pack
 from types import FunctionType
-
-from copyreg import _extension_registry
-from copyreg import dispatch_table
 
 __all__ = ["PickleError", "PicklingError", "UnpicklingError", "Pickler", "dump", "dumps"]
 
@@ -261,6 +260,7 @@ class _Framer:
         # it possible to optimize file.read calls in the loader.
         write(header)
         write(payload)
+
 
 # Tools used for pickling.
 

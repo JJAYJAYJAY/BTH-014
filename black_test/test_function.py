@@ -24,13 +24,13 @@ def function4(x: int):
 class TestFunction(unittest.TestCase):
     def test_function(self):
         test_cases = {
-            "function1" : function1,
-            "function2" : function2,
-            "function3" : function3,
-            "function4" : function4,
+            "function1": function1,
+            "function2": function2,
+            "function3": function3,
+            "function4": function4,
         }
 
-        for name,val in test_cases.items():
+        for name, val in test_cases.items():
             with self.subTest(name=name):
                 with open(f"res/test_{name}_write.pkl", "wb") as f:
                     pickle.dump(val, f)
@@ -39,6 +39,7 @@ class TestFunction(unittest.TestCase):
                         hashlib.sha256(pickle.dumps(val)).hexdigest(),
                         hashlib.sha256(f.read()).hexdigest()
                     )
+
 
 if __name__ == '__main__':
     unittest.main()

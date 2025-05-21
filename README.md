@@ -3,7 +3,8 @@
 ## Introduce
 
 本项目测试Linux、mac与win主流操作系统下的Python3.8、3.9、3.10、3.11、3.12版本的pickle模块的序列化功能。  
-本项目使用conda环境进行不同版本下的管理测试。
+本项目使用conda环境进行不同版本下的管理测试。  
+项目仅仅测试序列化模块的dump与dumps功能，故将源文件的load与loads功能删除。
 
 ## Project Structure
 

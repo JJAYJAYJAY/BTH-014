@@ -1,22 +1,25 @@
 import hashlib
-import pickle
+from lib_pickle import pickle
 import unittest
-
 
 
 def function1():
     print('hello world')
 
-def function2(x:int) -> int:
-    return x+1
 
-def function3(x:int) -> bool:
-    return x>1 and x<100
+def function2(x: int) -> int:
+    return x + 1
 
-def function4(x:int):
-    if x<100:
-        function4(x+1)
-        
+
+def function3(x: int) -> bool:
+    return x > 1 and x < 100
+
+
+def function4(x: int):
+    if x < 100:
+        function4(x + 1)
+
+
 class TestFunction(unittest.TestCase):
     def test_function1(self):
         a = function1

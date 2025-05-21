@@ -33,26 +33,6 @@ def generate_b_string():
     str = generate_string()
     return str.encode()
 
-def generate_random_value(depth):
-    options = [
-        generate_int,
-        generate_big_int,
-        generate_string,
-        generate_float,
-        generate_b_string,
-        lambda: None,
-        lambda: True,
-        lambda: False
-    ]
-
-    if depth <= 3:
-        options += [
-            lambda: generate_array(depth),
-            lambda: generate_dict(depth)
-        ]
-
-    return random.choice(options)()
-
 def generate_array(depth):
     arr = []
     for _ in range(random.randint(1, 5)):
@@ -78,3 +58,23 @@ def generate_deep_dict():
     for i in range(300):
         a = {generate_string(): a}
     return a
+
+def generate_random_value(depth = 0):
+    options = [
+        generate_int,
+        generate_big_int,
+        generate_string,
+        generate_float,
+        generate_b_string,
+        lambda: None,
+        lambda: True,
+        lambda: False
+    ]
+
+    if depth <= 3:
+        options += [
+            lambda: generate_array(depth),
+            lambda: generate_dict(depth)
+        ]
+
+    return random.choice(options)()

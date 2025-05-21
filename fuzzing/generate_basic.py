@@ -1,22 +1,18 @@
 import random
 
-
+import string
 def generate_char():
     return chr(random.randint(0, 0x10FFFF))
-
 
 def generate_string():
     length = random.randint(0, 5)
     return ''.join(generate_char() for _ in range(length))
 
-
 def generate_big_int():
-    return random.randint(-2 ** 63, 2 ** 63 - 1) ** 100
-
+    return random.randint(-2**63, 2**63 - 1) ** 100
 
 def generate_int():
-    return random.randint(-2 ** 63, 2 ** 63 - 1)
-
+    return random.randint(-2**63, 2**63 - 1)
 
 def generate_float():
     choice = random.choice(['normal', 'large', 'small', 'special'])
@@ -33,13 +29,37 @@ def generate_float():
     elif choice == 'special':
         return random.choice([float('inf'), float('-inf'), float('nan')])
 
-
 def generate_b_string():
-    s = generate_string()
-    return s.encode()
+    str = generate_string()
+    return str.encode()
 
+def generate_array(depth):
+    arr = []
+    for _ in range(random.randint(1, 5)):
+        arr.append(generate_random_value(depth + 1))
+    return arr
 
-def generate_random_value(depth):
+def generate_dict(depth):
+    d = {}
+    for _ in range(random.randint(1, 5)):
+        key = generate_string()
+        value = generate_random_value(depth + 1)
+        d[key] = value
+    return d
+
+def generate_deep_array():
+    a = []
+    for i in range(300):
+        a = [generate_int(), a]
+    return a
+
+def generate_deep_dict():
+    a = {}
+    for i in range(300):
+        a = {generate_string(): a}
+    return a
+
+def generate_random_value(depth = 0):
     options = [
         generate_int,
         generate_big_int,
@@ -58,33 +78,3 @@ def generate_random_value(depth):
         ]
 
     return random.choice(options)()
-
-
-def generate_array(depth):
-    arr = []
-    for _ in range(random.randint(1, 5)):
-        arr.append(generate_random_value(depth + 1))
-    return arr
-
-
-def generate_dict(depth):
-    d = {}
-    for _ in range(random.randint(1, 5)):
-        key = generate_string()
-        value = generate_random_value(depth + 1)
-        d[key] = value
-    return d
-
-
-def generate_deep_array():
-    a = []
-    for i in range(300):
-        a = [generate_int(), a]
-    return a
-
-
-def generate_deep_dict():
-    a = {}
-    for i in range(300):
-        a = {generate_string(): a}
-    return a

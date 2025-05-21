@@ -1,6 +1,7 @@
 import hashlib
-from lib_pickle import pickle
 import unittest
+
+from lib_pickle import pickle
 
 
 class Person:

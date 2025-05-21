@@ -1,16 +1,24 @@
+import hashlib
 import random
 import string
-import pickle
+import unittest
+
 from generate_basic import generate_random_value
+from lib_pickle import pickle
+
 
 def generate_class_name():
     return ''.join(random.choices(string.ascii_uppercase, k=5))
 
+
 def generate_attribute_name():
     return ''.join(random.choices(string.ascii_lowercase + string.digits + "_", k=random.randint(3, 8)))
 
+
 def generate_method_name():
     return ''.join(random.choices(string.ascii_lowercase + string.digits + "_", k=random.randint(3, 8)))
+
+
 def generate_class():
     # 随机生成类的名称
     class_name = generate_class_name()
@@ -31,6 +39,7 @@ def generate_class():
 
     return new_class
 
+
 def generate_object():
     generated_class = generate_class()
     obj = generated_class()
@@ -39,20 +48,11 @@ def generate_object():
             setattr(obj, attr, value)  # 绑定到实例
     return obj
 
-if __name__ == "__main__":
-    # 生成一个对象
-    obj = generate_object()
 
-    # 获取类名
-    class_name = obj.__class__.__name__
-
-    # 获取属性
-    attributes = vars(obj)
-
-    # 获取方法名
-    methods = [func for func in dir(obj) if callable(getattr(obj, func)) and not func.startswith('__')]
-
-    # 输出结果
-    print(f"Class Name: {class_name}")
-    print(f"Attributes: {attributes}")
-    print(f"Methods: {methods}")
+class TestGenerateClass(unittest.TestCase):
+    def test_generate_class(self):
+        for _ in range(10):
+            obj = generate_object()
+            a_s1 = pickle.dumps(obj)
+            a_s2 = pickle.dumps(obj)
+            assert (hashlib.sha256(a_s1).hexdigest() == hashlib.sha256(a_s2).hexdigest())

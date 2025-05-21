@@ -22,7 +22,7 @@ class TestMoudle(unittest.TestCase):
         assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
 
     def test_path(self):
-        a = Path('.')
+        a = Path('./res/test.txt')
         a_pickle1 = pickle.dumps(a)
         a_pickle2 = pickle.dumps(a)
         assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())

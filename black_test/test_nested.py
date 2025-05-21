@@ -19,8 +19,9 @@ class Person:
 
 
 class Testnested(unittest.TestCase):
-    def test_nested_dict(self):
-        a = {
+    def test_nested(self):
+        test_cases = {
+            "nested_dict" : {
             "engineering": {
                 "manager": {
                     "name": "Alice",
@@ -35,23 +36,20 @@ class Testnested(unittest.TestCase):
             "marketing": {
                 "locate": 'sprck'
             }
+        },
+            "nested_class": Person("John Doe", 30, Address("123 Main St", "Anytown", "12345")),
+            "nested_list":[[1, 23, 1], 2, [23, [231, [1]]]]
         }
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
 
-    def test_nested_class(self):
-        a = Person("John Doe", 30, Address("123 Main St", "Anytown", "12345"))
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
-
-    def test_nested_list(self):
-        a = [[1, 23, 1], 2, [23, [231, [1]]]]
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
-
+        for name,val in test_cases.items():
+            with self.subTest(name=name):
+                with open(f"res/test_{name}_write.pkl", "wb") as f:
+                    pickle.dump(val, f)
+                with open(f"res/test_{name}_write.pkl", "rb") as f:
+                    self.assertEqual(
+                        hashlib.sha256(pickle.dumps(val)).hexdigest(),
+                        hashlib.sha256(f.read()).hexdigest()
+                    )
 
 if __name__ == '__main__':
     unittest.main()

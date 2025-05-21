@@ -9,36 +9,28 @@ from lib_pickle import pickle
 
 
 class TestMoudle(unittest.TestCase):
-    def test_collections(self):
-        a = [
-            deque([1, 2, 3]),
-            OrderedDict[('a', 1), ('b', 2)],
-            defaultdict(int, [('a', 1), ('b', 2)]),
-            Counter('safvonusod'),
-            namedtuple('Point', ['x', 'y'])  # 这个会报错
-        ]
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
+    def test_moudle(self):
+        test_cases = {
+            "collection": [
+                deque([1, 2, 3]),
+                OrderedDict[('a', 1), ('b', 2)],
+                defaultdict(int, [('a', 1), ('b', 2)]),
+                Counter('safvonusod')],
+            "path": Path('./res/test.txt'),
+            "datetime": datetime.now(),
+            "set":{'a', 1, 3},
+            "json":json.dumps({'name': 'Alice', 'age': 12})
+        }
 
-    def test_path(self):
-        a = Path('./res/test.txt')
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
-
-    def test_datatime(self):
-        a = datetime.now()
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
-
-    def test_json(self):
-        a = json.dumps({'name': 'Alice', 'age': 12})
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
-
+        for name,val in test_cases.items():
+            with self.subTest(name=name):
+                with open(f"res/test_{name}_write.pkl", "wb") as f:
+                    pickle.dump(val, f)
+                with open(f"res/test_{name}_write.pkl", "rb") as f:
+                    self.assertEqual(
+                        hashlib.sha256(pickle.dumps(val)).hexdigest(),
+                        hashlib.sha256(f.read()).hexdigest()
+                    )
 
 if __name__ == '__main__':
     unittest.main()

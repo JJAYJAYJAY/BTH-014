@@ -91,30 +91,23 @@ class BankAccount:
 
 
 class TestCustomerClass(unittest.TestCase):
-    def test_person(self):
-        a = Person('Alice', 19)
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
+    def test_customer_class(self):
+        test_cases = {
+            "person" : Person('Alice',19),
+            "mathutil": MathUtils,
+            "animal": [Dog('ww'), Cat('mm')],
+            "bankcount":BankAccount('Bob', 0),
+        }
 
-    def test_mathutils(self):
-        a = MathUtils
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
-
-    def test_Animal(self):
-        a = [Dog('ww'), Cat('mm')]
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
-
-    def test_bankaccount(self):
-        a = BankAccount('Mint', 0)
-        a_pickle1 = pickle.dumps(a)
-        a_pickle2 = pickle.dumps(a)
-        assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
-
+        for name,val in test_cases.items():
+            with self.subTest(name=name):
+                with open(f"res/test_{name}_write.pkl", "wb") as f:
+                    pickle.dump(val, f)
+                with open(f"res/test_{name}_write.pkl", "rb") as f:
+                    self.assertEqual(
+                        hashlib.sha256(pickle.dumps(val)).hexdigest(),
+                        hashlib.sha256(f.read()).hexdigest()
+                    )
 
 if __name__ == '__main__':
     unittest.main()

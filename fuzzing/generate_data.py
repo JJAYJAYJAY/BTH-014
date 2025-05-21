@@ -2,6 +2,7 @@ import random
 import string
 import sys
 
+
 class GenerateData:
     def __init__(self, seed=None):
         self.seed = seed
@@ -14,7 +15,7 @@ class GenerateData:
 
     def generate_string(self):
         length = random.randint(0, 5)
-        return ''.join(self.generate_char() for i in range(length))
+        return ''.join(self.generate_char() for _ in range(length))
 
     def generate_big_int(self):
         return random.randint(-2 ** 63, 2 ** 63 - 1) ** 100
@@ -38,8 +39,8 @@ class GenerateData:
             return random.choice([float('inf'), float('-inf'), float('nan')])
 
     def generate_b_string(self):
-        str = self.generate_string()
-        return str.encode()
+        s = self.generate_string()
+        return s.encode()
 
     def generate_array(self, depth):
         arr = []
@@ -77,34 +78,25 @@ class GenerateData:
         return ''.join(random.choices(string.ascii_lowercase + string.digits + "_", k=random.randint(3, 8)))
 
     def generate_class(self):
-        # 随机类名
+        # 随机生成类的名称
         class_name = self.generate_class_name()
 
-        # 随机属性
-        attrs = {self.generate_attribute_name(): None
-                 for _ in range(random.randint(1, 5))}
+        # 随机生成类的属性名称
+        attributes = {f"{self.generate_attribute_name()}": None for _ in range(random.randint(1, 5))}
 
-        # 随机方法（避免 lambda；lambda 本身也无法 pickle）
-        def make_method():
-            # 随便返回一个可 pickle 的随机值
-            def _m(self):
-                return random.randint(0, 100)
+        # 随机生成类的方法
+        methods = {
+            f"{self.generate_method_name()}": lambda self: self.generate_random_value()
+            for _ in range(random.randint(1, 3))
+        }
 
-            return _m
+        class_dict = {**attributes, **methods, '__init__': lambda self: None}
 
-        methods = {self.generate_method_name(): make_method()
-                   for _ in range(random.randint(1, 3))}
-
-        def __init__(self):
-            pass
-
-        class_dict = {**attrs, **methods, "__init__": __init__}
-        new_cls = type(class_name, (object,), class_dict)
-
+        # 动态创建类
+        new_class = type(class_name, (object,), class_dict)
         module = sys.modules[self.__class__.__module__]
-        setattr(module, class_name, new_cls)
-
-        return new_cls
+        setattr(module, class_name, new_class)
+        return new_class
 
     def generate_object(self):
         generated_class = self.generate_class()  # 动态生成类

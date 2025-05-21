@@ -1,14 +1,16 @@
 import hashlib
+import os
 import platform
+import sys
 import unittest
 
 from fuzzing.generate_data import GenerateData
 from lib_pickle import pickle
-
+from black_test.Base_test_class import BaseTestClass
 os_name = platform.system()
 
 
-class TestFuzz(unittest.TestCase):
+class TestFuzz(unittest.TestCase, BaseTestClass):
     def test_fuzz(self):
         errors = []
         # 读取随机种子
@@ -23,15 +25,7 @@ class TestFuzz(unittest.TestCase):
             with self.subTest(name=i):
                 try:
                     val = data_generator.generate_random_value()
-                    file_name = f"res/{os_name}_test_{i}_write.pkl"
-                    with open(file_name, "wb") as f:
-                        pickle.dump(val, f)
-
-                    with open(file_name, "rb") as f:
-                        self.assertEqual(
-                            hashlib.sha256(pickle.dumps(val)).hexdigest(),
-                            hashlib.sha256(f.read()).hexdigest()
-                        )
+                    self.dump_and_check(val, f"fuzz{i}")
                 except Exception as e:
                     errors.append((i, e))
         if errors:

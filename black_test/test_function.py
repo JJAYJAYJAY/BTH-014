@@ -1,7 +1,9 @@
-import hashlib
+import platform
 import unittest
 
-from lib_pickle import pickle
+from black_test.Base_test_class import BaseTestClass
+
+os_name = platform.system()
 
 
 def function1():
@@ -21,7 +23,7 @@ def function4(x: int):
         function4(x + 1)
 
 
-class TestFunction(unittest.TestCase):
+class TestFunction(unittest.TestCase, BaseTestClass):
     def test_function(self):
         test_cases = {
             "function1": function1,
@@ -32,13 +34,7 @@ class TestFunction(unittest.TestCase):
 
         for name, val in test_cases.items():
             with self.subTest(name=name):
-                with open(f"res/test_{name}_write.pkl", "wb") as f:
-                    pickle.dump(val, f)
-                with open(f"res/test_{name}_write.pkl", "rb") as f:
-                    self.assertEqual(
-                        hashlib.sha256(pickle.dumps(val)).hexdigest(),
-                        hashlib.sha256(f.read()).hexdigest()
-                    )
+                self.dump_and_check(val, name)
 
 
 if __name__ == '__main__':

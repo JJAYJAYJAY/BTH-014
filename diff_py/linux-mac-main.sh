@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 环境名列表
-envs=("py36_env" "py39_env" "py311_env")
+envs=("py36" "py39" "py311")
 
 # 输出目录
 outdir="pickle_results"
@@ -18,7 +18,7 @@ do
 
     outfile="$outdir/result_${env}.txt"
     echo "Running compare_pickle.py in $env..."
-    python compare_pickle.py > "$outfile"
+    cover compare_pickle.py > "$outfile"
 
     echo "Saved output to $outfile"
     echo "-------------------------"

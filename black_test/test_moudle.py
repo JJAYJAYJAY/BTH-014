@@ -1,10 +1,11 @@
 import hashlib
 import json
-from lib_pickle import pickle
 import unittest
 from collections import Counter, OrderedDict, defaultdict, deque, namedtuple
 from datetime import datetime
 from pathlib import Path
+
+from lib_pickle import pickle
 
 
 class TestMoudle(unittest.TestCase):
@@ -21,7 +22,7 @@ class TestMoudle(unittest.TestCase):
         assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())
 
     def test_path(self):
-        a = Path('.')
+        a = Path('./res/test.txt')
         a_pickle1 = pickle.dumps(a)
         a_pickle2 = pickle.dumps(a)
         assert (hashlib.sha256(a_pickle1).hexdigest() == hashlib.sha256(a_pickle2).hexdigest())

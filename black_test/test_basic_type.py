@@ -1,14 +1,13 @@
-import hashlib
 import platform
 import random
 import unittest
 
-from lib_pickle import pickle
+from black_test.Base_test_class import BaseTestClass
 
 os_name = platform.system()
 
 
-class TestBasicType(unittest.TestCase):
+class TestBasicType(unittest.TestCase, BaseTestClass):
     def test_basic_type(self):
         test_cases = {
             "int": 1,
@@ -21,14 +20,8 @@ class TestBasicType(unittest.TestCase):
         }
 
         for name, val in test_cases.items():
-            with self.subTest(value=name):
-                with open(f"res/{os_name}_test_{name}_write.pkl", "wb") as f:
-                    pickle.dump(val, f)
-                with open(f"res/{os_name}_test_{name}_write.pkl", "rb") as f:
-                    self.assertEqual(
-                        hashlib.sha256(pickle.dumps(val)).hexdigest(),
-                        hashlib.sha256(f.read()).hexdigest()
-                    )
+            with self.subTest(name=name):
+                self.dump_and_check(val, name)
 
 
 if __name__ == '__main__':

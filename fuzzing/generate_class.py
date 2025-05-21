@@ -11,6 +11,7 @@ def generate_attribute_name():
 
 def generate_method_name():
     return ''.join(random.choices(string.ascii_lowercase + string.digits + "_", k=random.randint(3, 8)))
+
 def generate_class():
     # 随机生成类的名称
     class_name = generate_class_name()

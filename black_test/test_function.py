@@ -25,6 +25,7 @@ def function4(x: int):
 
 class TestFunction(BaseTestClass):
     def test_function(self):
+        #TC_004
         test_cases = {
             "function1": function1,
             "function2": function2,

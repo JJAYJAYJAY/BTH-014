@@ -102,6 +102,35 @@ class TestDiffOS(BaseCompareClass):
         test_cases = ["missingEx1", "missingEx2", "missingState", "pickleBuffer", "missingStr", "FakeData"]
         self.base_test(test_cases, flag=True)
 
+    def test_boundary_in_diff(self):
+        test_cases = ["binint1_max", "binint1_min", "binint2_max", "binint2_min",
+                      "protocol_2", "protocol_3", "simple_list", "simple_dict",
+                      "single_char", "nested_list", "nested_dict", "min_unicode",
+                      "max_unicode", "float32_min", "unit_float", "true_context",
+                      "false_context", "reduce_object", "sys_version", "cross_reference"]
+        self.base_test(test_cases, flag=True)
+
+    def test_boundary_out_diff(self):
+        test_cases = ["lambda", "open_file", "thread_lock", "bad_unicode",
+                      "module", "unregistered_class", "timestamp"]
+        self.base_test(test_cases, flag=True)
+
+    def test_boundary_on_diff(self):
+        test_cases = ["empty_list", "empty_dict", "empty_set", "empty_tuple",
+                      "zero_int", "zero_float", "zero_complex", "true_value",
+                      "false_value", "none_value", "maxsize", "min_int",
+                      "infinity", "negative_inf", "nan", "single_element_list",
+                      "single_element_dict", "single_element_tuple", "deep_list",
+                      "deep_dict", "deep_tuple", "none_type", "object_type",
+                      "null_byte", "max_byte"]
+        self.base_test(test_cases, flag=True)
+
+    def test_boundary_off_diff(self):
+
+        test_cases = ["deep_list", "deep_dict", "deep_tuple",
+                      "huge_float", "bool_2", "random_obj", "path_obj"]
+        self.base_test(test_cases, flag=True)
+
 
 class TestDiffPY(BaseCompareClass):
     def test_basic_type_diff(self):
@@ -145,4 +174,32 @@ class TestDiffPY(BaseCompareClass):
 
     def test_white_diff(self):
         test_cases = ["missingEx1", "missingEx2", "missingState", "pickleBuffer", "missingStr", "FakeData"]
+        self.base_test(test_cases, flag=False)
+
+    def test_boundary_in_diff(self):
+        test_cases = ["binint1_max", "binint1_min", "binint2_max", "binint2_min",
+                      "protocol_2", "protocol_3", "simple_list", "simple_dict",
+                      "single_char", "nested_list", "nested_dict", "min_unicode",
+                      "max_unicode", "float32_min", "unit_float", "true_context",
+                      "false_context", "reduce_object", "sys_version", "cross_reference"]
+        self.base_test(test_cases, flag=False)
+
+    def test_boundary_out_diff(self):
+        test_cases = ["lambda", "open_file", "thread_lock", "bad_unicode",
+                      "module", "unregistered_class", "timestamp"]
+        self.base_test(test_cases, flag=False)
+
+    def test_boundary_on_diff(self):
+        test_cases = ["empty_list", "empty_dict", "empty_set", "empty_tuple",
+                      "zero_int", "zero_float", "zero_complex", "true_value",
+                      "false_value", "none_value", "maxsize", "min_int",
+                      "infinity", "negative_inf", "nan", "single_element_list",
+                      "single_element_dict", "single_element_tuple", "deep_list",
+                      "deep_dict", "deep_tuple", "none_type", "object_type",
+                      "null_byte", "max_byte"]
+        self.base_test(test_cases, flag=False)
+
+    def test_boundary_off_diff(self):
+        test_cases = ["deep_list", "deep_dict", "deep_tuple",
+                      "huge_float", "bool_2", "random_obj", "path_obj"]
         self.base_test(test_cases, flag=False)

@@ -71,17 +71,21 @@ have been removed from the `pickle` source file.
 │   ├── win-main.bat # Windows main test script
 │   ├── linux-mac-main.sh # Linux/macOS main test script
 ```
+
 ## Usage Instructions
 
 ### Prerequisites
+
 1. Install conda environment manager
 2. Create three conda environments:
-   - `py36` (Python 3.6)
-   - `py39` (Python 3.9)
-   - `py311` (Python 3.11)
+    - `py36` (Python 3.6)
+    - `py39` (Python 3.9)
+    - `py311` (Python 3.11)
 
 ### Execution
+
 **Windows**:
+
 ```powershell
 win-main.bat
 Linux/macOS:
@@ -91,12 +95,16 @@ chmod +x linux-mac-main.sh
 ```
 
 ### Output
-|Directory Name | Content |
-|---|---|
-|res|Serialized results|
-|test_result|Test reports|
+
+| Directory Name | Content            |
+|----------------|--------------------|
+| res            | Serialized results |
+| test_result    | Test reports       |
+
 ### Comparison Testing
+
 This project only provides a comparison testing script for Windows:
+
 ```powershell
 win-compare.bat
 ```
@@ -176,33 +184,41 @@ dump, dumps, = _dump, _dumps
 ```
 
 ## 使用方法
+
 ### 使用前提
+
 1. 安装conda环境管理器
 2. 创建三个conda环境：
-   - `py36`（Python 3.6）
-   - `py39`（Python 3.9）
-   - `py311`（Python 3.11）
+    - `py36`（Python 3.6）
+    - `py39`（Python 3.9）
+    - `py311`（Python 3.11）
 
 之后请在win下输入以下命令
+
 ```shell
 win-main.bat
 ```
+
 在linux或mac下输入
+
 ```shell
 chmod +x linux-mac-main.sh
 .\linux-mac-main.sh
 ```
 
-### 输出  
-会生成如下结果  
+### 输出
 
-|文件夹名|内容|
-|---|---|
-|res|储存序列化结果|
-|test_result|测试报告|
+会生成如下结果
+
+| 文件夹名        | 内容      |
+|-------------|---------|
+| res         | 储存序列化结果 |
+| test_result | 测试报告    |
 
 ### 对比测试
+
 本项目只提供win下的对比测试脚本
+
 ```shell
 win-compare.bat
 ```

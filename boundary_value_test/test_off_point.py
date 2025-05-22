@@ -1,17 +1,13 @@
-import hashlib
 import pathlib
-import platform
 import random
-import threading
 import unittest
-import sys
-from datetime import time
 
-from lib_pickle import pickle
 from black_test.Base_test_class import BaseTestClass
+
 
 class TestOffPoint(unittest.TestCase, BaseTestClass):
     def test_off_point(self):
+        errors = []
         deep_list = []
         deep_dict = {}
         deep_tuple = ()
@@ -41,7 +37,12 @@ class TestOffPoint(unittest.TestCase, BaseTestClass):
 
         for name, val in test_cases.items():
             with self.subTest(value=name):
-                self.dump_and_check(val, name)
+                try:
+                    self.dump_and_check(val, name)
+                except Exception as e:
+                    errors.append(f"{e}")
+        if errors:
+            self.fail('\n'.join(errors))
 
 
 if __name__ == '__main__':

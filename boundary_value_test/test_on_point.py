@@ -1,17 +1,15 @@
-import hashlib
 import platform
-import random
-import unittest
 import sys
+import unittest
 
-from lib_pickle import pickle
 from black_test.Base_test_class import BaseTestClass
 
 os_name = platform.system()
 
 
-class TestOnPoint(unittest.TestCase,BaseTestClass):
+class TestOnPoint(unittest.TestCase, BaseTestClass):
     def test_on_point(self):
+        errors = []
         deep_list = []
         deep_dict = {}
         deep_tuple = ()
@@ -68,7 +66,13 @@ class TestOnPoint(unittest.TestCase,BaseTestClass):
 
         for name, val in test_cases.items():
             with self.subTest(value=name):
-                self.dump_and_check(val, name)
+                try:
+                    self.dump_and_check(val, name)
+                except Exception as e:
+                    errors.append(f"{e}")
+        if errors:
+            self.fail('\n'.join(errors))
+
 
 if __name__ == '__main__':
     unittest.main()

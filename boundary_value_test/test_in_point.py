@@ -1,11 +1,8 @@
-import hashlib
-import platform
-import random
-import unittest
 import sys
+import unittest
 
-from lib_pickle import pickle
 from black_test.Base_test_class import BaseTestClass
+
 
 class TestInPoint(unittest.TestCase, BaseTestClass):
     def test_in_point(self):
@@ -65,7 +62,9 @@ class TestInPoint(unittest.TestCase, BaseTestClass):
         class CustomReduce:
             def __reduce__(self):
                 return (str, ("reduced",))
+
         return CustomReduce()
+
 
 if __name__ == '__main__':
     unittest.main()

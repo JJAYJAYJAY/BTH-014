@@ -1,12 +1,8 @@
-import hashlib
-import platform
-import random
+import sys
 import threading
 import unittest
-import sys
 from datetime import time
 
-from lib_pickle import pickle
 from black_test.Base_test_class import BaseTestClass
 
 
@@ -20,6 +16,7 @@ class TestOutPoint(unittest.TestCase, BaseTestClass):
         self.file.close()
 
     def test_out_point(self):
+        errors = []
         test_cases = {
             # 不可序列化对象
             "lambda": lambda x: x,
@@ -39,7 +36,13 @@ class TestOutPoint(unittest.TestCase, BaseTestClass):
 
         for name, val in test_cases.items():
             with self.subTest(value=name):
-                self.dump_and_check(val, name)
+                try:
+                    self.dump_and_check(val, name)
+                except Exception as e:
+                    errors.append(f"{e}")
+
+        if errors:
+            self.fail("\n".join(errors))
 
 
 if __name__ == '__main__':

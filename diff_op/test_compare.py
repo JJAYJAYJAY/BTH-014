@@ -1,7 +1,7 @@
 import hashlib
 import os
-import unittest
 import sys
+import unittest
 
 
 class BaseCompareClass:

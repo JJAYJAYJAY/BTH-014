@@ -21,7 +21,8 @@ class BaseCompareClass(unittest.TestCase):
         "py311": os.path.join("res", "Windows", "3.11"),
     }
 
-    def compare(self, case_name: str, *, ext: str = "pkl", flag: bool = True) -> None:
+    def compare(self, case_name: str, *, ext: str = "pkl", flag: bool = True):
+        errors = []
         hashes: Dict[str, str] = {}
         result_paths = self._os_paths if flag else self._py_paths
 
@@ -37,28 +38,30 @@ class BaseCompareClass(unittest.TestCase):
                 f"'{case_name}' only found {len(hashes)} result file(s); skipping comparison"
             )
             return
-
         # 生成所有唯一平台组合
+
         platforms = list(hashes.keys())
         for a, b in itertools.combinations(platforms, 2):
             with self.subTest(platform_a=a, platform_b=b):
-                self.assertEqual(
-                    hashes[a],
-                    hashes[b],
-                    msg=(
-                        f"Type '{case_name}' differs between {a} "
-                        f"and {b} (Hash: {hashes[a][:8]} vs {hashes[b][:8]})"
+                try:
+                    self.assertEqual(
+                        hashes[a],
+                        hashes[b],
+                        msg=(
+                            f"Type '{case_name}' differs between {a} "
+                            f"and {b} (Hash: {hashes[a][:8]} vs {hashes[b][:8]})"
+                        )
                     )
-                )
+                except Exception as e:
+                    errors.append(f"Error comparing {case_name}: {e}")
+        return errors
 
     def base_test(self, test_cases: list, flag: bool):
         errors = []
         for name in test_cases:
             with self.subTest(name=name):
-                try:
-                    self.compare(name, flag=flag)
-                except Exception as e:
-                    errors.append(f"Different  files for {name}: {e}")
+                errors= errors + self.compare(name, flag=flag)
+
         if errors:
             self.fail("\n".join(errors))
 

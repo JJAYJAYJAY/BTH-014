@@ -16,11 +16,11 @@ class TestModule(BaseTestClass):
         test_cases = {
             "collection": [
                 deque([1, 2, 3]),
-                OrderedDict[('a', 1), ('b', 2)],
+                OrderedDict([('a', 1), ('b', 2)]),
                 defaultdict(int, [('a', 1), ('b', 2)]),
                 Counter('safvonusod')],
             "path": pathlib.Path('/path/to/file'),
-            "datetime": datetime.now(),
+            "datetime": datetime(2023, 10, 1, 12, 0, 0),
             "json": json.dumps({'name': 'Alice', 'age': 12})
         }
 

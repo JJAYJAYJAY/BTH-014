@@ -39,6 +39,68 @@ dump, dumps = _dump, _dumps
 The project only tests the `dump` and `dumps` functions of the serialization module, so the `load` and `loads` functions
 have been removed from the `pickle` source file.
 
+## Project Structure
+
+```
+├── BTH-014
+│   ├── black_test
+│   │   ├── Base_test_class.py # Base test class with encapsulated test units
+│   │   ├── test_basic_types.py # Basic type serialization
+│   │   ├── test_container.py # Container type serialization
+│   │   ├── test_customer_class.py # Custom class serialization
+│   │   ├── test_function.py # Function serialization
+│   │   ├── test_moudle.py # Common module serialization (e.g., datetime)
+│   │   ├── test_nested.py # Nested structure serialization
+│   │   ├── test_reference.py # Circular reference serialization
+│   ├── boundary_value_test
+│   │   ├── test_in_point.py # Inner boundary testing
+│   │   ├── test_off_point.py # Off-boundary testing
+│   │   ├── test_on_point.py # On-boundary testing
+│   │   ├── test_out_point.py # Outer boundary testing
+│   ├── diff_test
+│   │   ├── test_diff.py # Cross-OS/Python version comparisons
+│   ├── fuzzing
+│   │   ├── generate_data.py # Fuzzing test data generation
+│   │   ├── generate_seed.py # Fuzzing test seed generation
+│   │   ├── test_fuzzing.py # Fuzzing test execution
+│   ├── white_test
+│   │   ├── test_missing_in_black.py # Coverage for black-box test gaps
+│   ├── lib_pickle # Modified pickle library
+│   ├── README.md
+│   ├── win-compare.bat # Windows comparison script
+│   ├── win-main.bat # Windows main test script
+│   ├── linux-mac-main.sh # Linux/macOS main test script
+```
+## Usage Instructions
+
+### Prerequisites
+1. Install conda environment manager
+2. Create three conda environments:
+   - `py36` (Python 3.6)
+   - `py39` (Python 3.9)
+   - `py311` (Python 3.11)
+
+### Execution
+**Windows**:
+```powershell
+win-main.bat
+Linux/macOS:
+```bash
+chmod +x linux-mac-main.sh
+./linux-mac-main.sh
+```
+
+### Output
+|Directory Name | Content |
+|---|---|
+|res|Serialized results|
+|test_result|Test reports|
+### Comparison Testing
+This project only provides a comparison testing script for Windows:
+```powershell
+win-compare.bat
+```
+
 ---
 
 # BTH-014（中文版本）
@@ -98,10 +160,8 @@ dump, dumps, = _dump, _dumps
 │   │   ├── test_off_point.py
 │   │   ├── test_on_point.py
 │   │   ├── test_out_point.py
-│   ├── diff_op
-│   │   ├── test_compare.py //比较不同OS的pickle
-│   ├── diff_py    
-│   │   ├── test_compare.py //比较不同py版本的pickle
+│   ├── diff_test
+│   │   ├── test_diff.py //比较不同OS、不同py的pickle
 │   ├── fuzzing  
 │   │   ├── generate_data.py //模糊测试数据生成
 │   │   ├── generate_seed.py //模糊测试种子生成
@@ -110,21 +170,30 @@ dump, dumps, = _dump, _dumps
 │   │   ├── test_missing_in_black.py  //测试黑盒测试中的遗漏行
 │   ├── lib_pickle //移植的pickle库
 │   ├── README.md
+│   ├── win-compare.bat //win下的对比测试脚本
+│   ├── win-main.bat //win下的主测试脚本
+│   ├── linux-mac-main.sh //linux和mac下的主测试脚本
 ```
 
 ## 使用方法
 ### 使用前提
-确保在使用前已经安装了`conda`环境， 并且确保环境中包含名为`py36`、`py39`、`py311`的三个python环境，三个环境的对应版本为
-`python3.6`,`python3.9`,`python3.11`   
+1. 安装conda环境管理器
+2. 创建三个conda环境：
+   - `py36`（Python 3.6）
+   - `py39`（Python 3.9）
+   - `py311`（Python 3.11）
+
 之后请在win下输入以下命令
 ```shell
 win-main.bat
 ```
 在linux或mac下输入
 ```shell
-linux-mac-main.sh
+chmod +x linux-mac-main.sh
+.\linux-mac-main.sh
 ```
 
+### 输出  
 会生成如下结果  
 
 |文件夹名|内容|

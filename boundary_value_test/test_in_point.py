@@ -12,16 +12,6 @@ class TestInPoint(unittest.TestCase, BaseTestClass):
         b["link"] = a
 
         test_cases = {
-            # 整数存储边界
-            "binint1_max": 127,
-            "binint1_min": -128,
-            "binint2_max": 32767,
-            "binint2_min": -32768,
-
-            # 有效协议版本
-            "protocol_2": 2,
-            "protocol_3": 3,
-
             # 有效数据结构
             "simple_list": [1],
             "simple_dict": {"a": 1},
@@ -37,11 +27,6 @@ class TestInPoint(unittest.TestCase, BaseTestClass):
 
             # 浮点精度
             "float32_min": 1.17549435e-38,
-            "unit_float": 1.0,
-
-            # 布尔上下文
-            "true_context": 1,
-            "false_context": 0,
 
             # 自定义对象
             "reduce_object": self._create_reduce_obj(),

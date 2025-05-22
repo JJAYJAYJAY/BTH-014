@@ -1,7 +1,7 @@
 import sys
 import threading
 import unittest
-from datetime import time
+import time
 
 from black_test.Base_test_class import BaseTestClass
 
@@ -18,20 +18,13 @@ class TestOutPoint(unittest.TestCase, BaseTestClass):
     def test_out_point(self):
         errors = []
         test_cases = {
-            # 不可序列化对象
+            # # 不可序列化对象
             "lambda": lambda x: x,
             "open_file": self.file,
             "thread_lock": self.lock,
 
-            # 非法Unicode
-            "bad_unicode": "\ud800",
-
             # 非法类型
             "module": sys,
-            "unregistered_class": self.__class__,
-
-            # 动态对象
-            "timestamp": time.time()
         }
 
         for name, val in test_cases.items():

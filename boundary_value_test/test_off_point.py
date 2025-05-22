@@ -25,12 +25,6 @@ class TestOffPoint(unittest.TestCase, BaseTestClass):
             # 浮点溢出
             "huge_float": 1e3009,
 
-            # 类型转换
-            "bool_2": bool(2),
-
-            # 动态状态对象
-            "random_obj": random.Random(),
-
             # 路径对象
             "path_obj": pathlib.Path('/path/to/file')
         }

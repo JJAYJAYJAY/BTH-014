@@ -1103,6 +1103,6 @@ def _dumps(obj, protocol=None, *, fix_imports=True, buffer_callback=None):
     return res
 
 
-# Use the faster _pickle if possible
+# Use the python version _pickle
 Pickler = _Pickler
 dump, dumps, = _dump, _dumps

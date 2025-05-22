@@ -7,3 +7,4 @@ htmlcov
 res
 .pickle_result
 test_results
+temp.txt

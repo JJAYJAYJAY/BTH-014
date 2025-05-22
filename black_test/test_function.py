@@ -23,7 +23,7 @@ def function4(x: int):
         function4(x + 1)
 
 
-class TestFunction(unittest.TestCase, BaseTestClass):
+class TestFunction(BaseTestClass):
     def test_function(self):
         test_cases = {
             "function1": function1,

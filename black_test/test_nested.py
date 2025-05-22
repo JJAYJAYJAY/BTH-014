@@ -20,7 +20,7 @@ class Person:
         self.address = address  # 嵌套Address对象
 
 
-class Testnested(unittest.TestCase, BaseTestClass):
+class Testnested(BaseTestClass):
     def test_nested(self):
         test_cases = {
             "nested_dict": {

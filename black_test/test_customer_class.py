@@ -92,7 +92,7 @@ class BankAccount:
         return True
 
 
-class TestCustomerClass(unittest.TestCase, BaseTestClass):
+class TestCustomerClass(BaseTestClass):
     def test_customer_class(self):
         test_cases = {
             "person": Person('Alice', 19),

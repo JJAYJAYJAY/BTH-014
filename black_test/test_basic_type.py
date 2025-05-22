@@ -6,7 +6,7 @@ from black_test.Base_test_class import BaseTestClass
 os_name = platform.system()
 
 
-class TestBasicType(unittest.TestCase, BaseTestClass):
+class TestBasicType(BaseTestClass):
     def test_basic_type(self):
         test_cases = {
             "int": 1,

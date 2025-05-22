@@ -11,8 +11,7 @@ for %%E in (%envs%) do (
     call conda activate %%E
     pip install pytest
     echo Running compare_pickle.py in %%E...
-    pytest .\diff_op\ > %outdir%\result_diffop_%%E.txt
-    pytest .\diff_py\ > %outdir%\result_diffpy.txt
+    pytest .\diff_test\ > %outdir%\result_diff_test_%%E.txt
     echo Saved output to %outdir%\
     echo -------------------------
 )

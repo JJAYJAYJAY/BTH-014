@@ -7,7 +7,7 @@ from black_test.Base_test_class import BaseTestClass
 os_name = platform.system()
 
 
-class TestOnPoint(unittest.TestCase, BaseTestClass):
+class TestOnPoint(BaseTestClass):
     def test_on_point(self):
         errors = []
         deep_list = []

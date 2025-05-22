@@ -6,7 +6,7 @@ from datetime import time
 from black_test.Base_test_class import BaseTestClass
 
 
-class TestOutPoint(unittest.TestCase, BaseTestClass):
+class TestOutPoint(BaseTestClass):
     def setUp(self):
         # 创建不可pickle的对象
         self.file = open("temp.txt", "w")

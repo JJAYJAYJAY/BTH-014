@@ -7,7 +7,7 @@ from fuzzing.generate_data import GenerateData
 os_name = platform.system()
 
 
-class TestFuzz(unittest.TestCase, BaseTestClass):
+class TestFuzz(BaseTestClass):
     def test_fuzz(self):
         errors = []
         # 读取随机种子

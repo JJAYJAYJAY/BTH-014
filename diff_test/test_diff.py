@@ -99,7 +99,8 @@ class TestDiffOS(BaseCompareClass):
             self.fail("\n".join(errors))
 
     def test_white_diff(self):
-        test_cases = ["missingEx1", "missingEx2", "missingState", "pickleBuffer", "missingStr", "FakeData"]
+        test_cases = ["missingEx1", "missingEx2", "missingState", "pickleBuffer", "missingStr", "FakeData",
+                      "bytearray1", "bytearray2", "bytearray3", "bytearray4", ]
         self.base_test(test_cases, flag=True)
 
     def test_boundary_in_diff(self):
@@ -126,7 +127,6 @@ class TestDiffOS(BaseCompareClass):
         self.base_test(test_cases, flag=True)
 
     def test_boundary_off_diff(self):
-
         test_cases = ["deep_list", "deep_dict", "deep_tuple",
                       "huge_float", "bool_2", "random_obj", "path_obj"]
         self.base_test(test_cases, flag=True)
@@ -173,7 +173,8 @@ class TestDiffPY(BaseCompareClass):
             self.fail("\n".join(errors))
 
     def test_white_diff(self):
-        test_cases = ["missingEx1", "missingEx2", "missingState", "pickleBuffer", "missingStr", "FakeData"]
+        test_cases = ["missingEx1", "missingEx2", "missingState", "pickleBuffer", "missingStr", "FakeData",
+                      "bytearray1", "bytearray2", "bytearray3", "bytearray4",]
         self.base_test(test_cases, flag=False)
 
     def test_boundary_in_diff(self):

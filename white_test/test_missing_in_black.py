@@ -94,6 +94,21 @@ class TestMissing(BaseTestClass):
             with self.subTest(name=name):
                 self.dump_and_check(val, name, 2)
 
-
+    def test_bytearray_missing6(self):
+        """line from 763 to 774"""
+        test_cases = {
+            "bytearray1": bytearray(),
+            "bytearray2": bytearray(b"abc"),
+        }
+        for name, val in test_cases.items():
+            with self.subTest(name=name):
+                self.dump_and_check(val, name, 4)
+        test_cases = {
+            "bytearray3": bytearray(b"a" * (64 * 1024)),
+            "bytearray4": bytearray(b"xyz"),
+        }
+        for name, val in test_cases.items():
+            with self.subTest(name=name):
+                self.dump_and_check(val, name, 5)
 if __name__ == '__main__':
     unittest.main()

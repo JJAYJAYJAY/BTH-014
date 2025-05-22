@@ -85,6 +85,7 @@ dump, dumps, = _dump, _dumps
 ```
 ├── BTH-014
 │   ├── black_test
+│   │   ├── Base_test_class.py //封装的测试单元基类
 │   │   ├── test_basic_types.py //基本类型的序列化
 │   │   ├── test_container.py // 容器类型的序列化
 │   │   ├── test_customer_class.py //自定义类的序列化
@@ -92,22 +93,47 @@ dump, dumps, = _dump, _dumps
 │   │   ├── test_moudle.py  //常见模块的序列化 如datatime
 │   │   ├── test_nested.py     //嵌套结构
 │   │   ├── test_reference.py  //循环引用结构
+│   ├── boundary_value_test //边界测试
+│   │   ├── test_in_point.py
+│   │   ├── test_off_point.py
+│   │   ├── test_on_point.py
+│   │   ├── test_out_point.py
 │   ├── diff_op
-│   │   ├── compare.py //比较不同OS的pickle
-│   │   ├── win-main.sh //程序入口，生成在win下的序列化结果
-│   │   ├── mac-main.sh //程序入口，生成在mac和linux下的序列化结果
+│   │   ├── test_compare.py //比较不同OS的pickle
 │   ├── diff_py    
-│   │   ├── compare.py //比较不同py版本的pickle
-│   │   ├── win-main.sh //程序入口，生成在不同py版本下的序列化结果
+│   │   ├── test_compare.py //比较不同py版本的pickle
 │   ├── fuzzing  
 │   │   ├── generate_data.py //模糊测试数据生成
 │   │   ├── generate_seed.py //模糊测试种子生成
 │   │   ├── test_fuzzing.py //模糊测试
-│   ├── lib_pickle
-│   ├── tool
+│   ├── white_test //白盒测试
+│   │   ├── test_missing_in_black.py  //测试黑盒测试中的遗漏行
+│   ├── lib_pickle //移植的pickle库
 │   ├── README.md
 ```
 
 ## 使用方法
+### 使用前提
+确保在使用前已经安装了`conda`环境， 并且确保环境中包含名为`py36`、`py39`、`py311`的三个python环境，三个环境的对应版本为
+`python3.6`,`python3.9`,`python3.11`   
+之后请在win下输入以下命令
+```shell
+win-main.bat
+```
+在linux或mac下输入
+```shell
+linux-mac-main.sh
+```
 
+会生成如下结果  
 
+|文件夹名|内容|
+|---|---|
+|res|储存序列化结果|
+|test_result|测试报告|
+
+### 对比测试
+本项目只提供win下的对比测试脚本
+```shell
+win-compare.bat
+```

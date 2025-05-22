@@ -60,7 +60,7 @@ class BaseCompareClass(unittest.TestCase):
         errors = []
         for name in test_cases:
             with self.subTest(name=name):
-                errors= errors + self.compare(name, flag=flag)
+                errors = errors + self.compare(name, flag=flag)
 
         if errors:
             self.fail("\n".join(errors))
@@ -72,7 +72,7 @@ class TestDiffOS(BaseCompareClass):
         self.base_test(test_cases, flag=True)
 
     def test_container_diff(self):
-        test_cases = ["list", "tuple", "dict", "set", "frozenset"]
+        test_cases = ["list", "tuple", "dict", "set", "frozenset", "small_set", "small_frozenset"]
         self.base_test(test_cases, flag=True)
 
     def test_customer_class_diff(self):

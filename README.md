@@ -109,6 +109,12 @@ This project only provides a comparison testing script for Windows:
 win-compare.bat
 ```
 
+### Coverage Report
+```bash
+coverage run -m pytest .\black_test\ .\fuzzing\ .\boundary_value_test\ .\white_test\
+coverage html
+```
+
 ---
 
 # BTH-014（中文版本）
@@ -221,4 +227,11 @@ chmod +x linux-mac-main.sh
 
 ```shell
 win-compare.bat
+```
+
+### 查看覆盖率
+
+```bash
+coverage run -m pytest .\black_test\ .\fuzzing\ .\boundary_value_test\ .\white_test\
+coverage html
 ```

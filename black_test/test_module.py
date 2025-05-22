@@ -1,9 +1,9 @@
 import json
+import pathlib
 import platform
 import unittest
 from collections import Counter, OrderedDict, defaultdict, deque
 from datetime import datetime
-from pathlib import Path
 
 from black_test.Base_test_class import BaseTestClass
 
@@ -18,7 +18,7 @@ class TestModule(unittest.TestCase, BaseTestClass):
                 OrderedDict[('a', 1), ('b', 2)],
                 defaultdict(int, [('a', 1), ('b', 2)]),
                 Counter('safvonusod')],
-            "path": Path('./res/test.txt'),
+            "path": pathlib.Path('/path/to/file'),
             "datetime": datetime.now(),
             "json": json.dumps({'name': 'Alice', 'age': 12})
         }

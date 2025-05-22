@@ -17,12 +17,12 @@ class BaseTestClass:
 
         # 序列化
         with open(file_path, "wb") as f:
-            pickle.dump(value, f,protocol=protocol)
+            pickle.dump(value, f, protocol=protocol)
 
         # 反序列化并比对哈希
         with open(file_path, "rb") as f:
             self.assertEqual(
-                hashlib.sha256(pickle.dumps(value,protocol=protocol)).hexdigest(),
+                hashlib.sha256(pickle.dumps(value, protocol=protocol)).hexdigest(),
                 hashlib.sha256(f.read()).hexdigest(),
                 msg=f"SHA256 mismatch for case '{case_name}'"
             )

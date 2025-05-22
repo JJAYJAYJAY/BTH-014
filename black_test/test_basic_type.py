@@ -1,5 +1,4 @@
 import platform
-import random
 import unittest
 
 from black_test.Base_test_class import BaseTestClass

@@ -94,7 +94,7 @@ class BankAccount:
 
 class TestCustomerClass(BaseTestClass):
     def test_customer_class(self):
-        #TC_003
+        # TC_003
         test_cases = {
             "person": Person('Alice', 19),
             "mathutil": MathUtils,

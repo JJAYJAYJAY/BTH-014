@@ -8,7 +8,7 @@ os_name = platform.system()
 
 class TestContainer(BaseTestClass):
     def test_container(self):
-        #TC_002
+        # TC_002
         test_cases = {
             "list": [1, 'a', 3, 4, 5, 6],
             "tuple": (1, 2, '*', 43, '1'),

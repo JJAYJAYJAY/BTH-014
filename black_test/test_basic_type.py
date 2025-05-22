@@ -8,6 +8,7 @@ os_name = platform.system()
 
 class TestBasicType(BaseTestClass):
     def test_basic_type(self):
+        #TC_001
         test_cases = {
             "int": 1,
             "float": 1.0,

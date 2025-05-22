@@ -18,6 +18,7 @@ class TestFuzz(BaseTestClass):
         data_generator = GenerateData(seed=seed)
 
         # 生成随机数据并进行测试
+        #TC_012
         for i in range(100):
             with self.subTest(name=i):
                 try:

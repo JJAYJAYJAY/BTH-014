@@ -10,7 +10,7 @@ class TestInPoint(BaseTestClass):
         a, b = {}, {}
         a["link"] = b
         b["link"] = a
-
+        #TC_008
         test_cases = {
             # 有效数据结构
             "simple_list": [1],

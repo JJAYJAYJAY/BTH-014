@@ -17,6 +17,8 @@ class TestOutPoint(BaseTestClass):
 
     def test_out_point(self):
         errors = []
+        
+        #TC_011
         test_cases = {
             # # 不可序列化对象
             "lambda": lambda x: x,

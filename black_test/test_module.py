@@ -12,6 +12,7 @@ os_name = platform.system()
 
 class TestModule(BaseTestClass):
     def test_module(self):
+        #TC_005
         test_cases = {
             "collection": [
                 deque([1, 2, 3]),

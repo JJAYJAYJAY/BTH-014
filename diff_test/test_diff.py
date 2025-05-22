@@ -1,4 +1,5 @@
 import hashlib
+import itertools
 import os
 import sys
 import unittest
@@ -23,6 +24,8 @@ class BaseCompareClass(unittest.TestCase):
     def compare(self, case_name: str, *, ext: str = "pkl", flag: bool = True) -> None:
         hashes: Dict[str, str] = {}
         result_paths = self._os_paths if flag else self._py_paths
+
+        # 收集所有平台的哈希值
         for platform_key, base_dir in result_paths.items():
             fp = os.path.join(base_dir, f"test_{case_name}_write.{ext}")
             if os.path.exists(fp):
@@ -35,16 +38,18 @@ class BaseCompareClass(unittest.TestCase):
             )
             return
 
-        ref_platform, ref_hash = next(iter(hashes.items()))
-        for platform_key, h in hashes.items():
-            self.assertEqual(
-                ref_hash,
-                h,
-                msg=(
-                    f"Type '{case_name}' differs between {ref_platform} "
-                    f"and {platform_key} result files (Hash: {h[:8]} vs {ref_hash[:8]})"
-                ),
-            )
+        # 生成所有唯一平台组合
+        platforms = list(hashes.keys())
+        for a, b in itertools.combinations(platforms, 2):
+            with self.subTest(platform_a=a, platform_b=b):
+                self.assertEqual(
+                    hashes[a],
+                    hashes[b],
+                    msg=(
+                        f"Type '{case_name}' differs between {a} "
+                        f"and {b} (Hash: {hashes[a][:8]} vs {hashes[b][:8]})"
+                    )
+                )
 
     def base_test(self, test_cases: list, flag: bool):
         errors = []

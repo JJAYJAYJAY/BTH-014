@@ -44,7 +44,7 @@ class TestDiffOS(unittest.TestCase, BaseCompareClass):
                 try:
                     self.compare(name)
                 except Exception as e:
-                    errors.append(f"Error accessing files for {name}: {e}")
+                    errors.append(f"Different  files for {name}: {e}")
         if errors:
             self.fail("\n".join(errors))
 
@@ -56,9 +56,10 @@ class TestDiffOS(unittest.TestCase, BaseCompareClass):
                 try:
                     self.compare(name)
                 except Exception as e:
-                    errors.append(f"Error accessing files for {name}: {e}")
+                    errors.append(f"Different  files for {name}: {e}")
         if errors:
             self.fail("\n".join(errors))
+
     def test_customer_class_diff(self):
         errors = []
         test_cases = ["person", "mathutil", "animal", "bankcount"]
@@ -67,7 +68,7 @@ class TestDiffOS(unittest.TestCase, BaseCompareClass):
                 try:
                     self.compare(name)
                 except Exception as e:
-                    errors.append(f"Error accessing files for {name}: {e}")
+                    errors.append(f"Different  files for {name}: {e}")
         if errors:
             self.fail("\n".join(errors))
 
@@ -79,7 +80,7 @@ class TestDiffOS(unittest.TestCase, BaseCompareClass):
                 try:
                     self.compare(name)
                 except Exception as e:
-                    errors.append(f"Error accessing files for {name}: {e}")
+                    errors.append(f"Different  files for {name}: {e}")
         if errors:
             self.fail("\n".join(errors))
 
@@ -91,9 +92,8 @@ class TestDiffOS(unittest.TestCase, BaseCompareClass):
                 try:
                     self.compare(name)
                 except Exception as e:
-                    errors.append(f"Error accessing files for {name}: {e}")
+                    errors.append(f"Different  files for {name}: {e}")
         if errors:
-
             self.fail("\n".join(errors))
 
     def test_nested_diff(self):
@@ -104,7 +104,7 @@ class TestDiffOS(unittest.TestCase, BaseCompareClass):
                 try:
                     self.compare(name)
                 except Exception as e:
-                    errors.append(f"Error accessing files for {name}: {e}")
+                    errors.append(f"Different  files for {name}: {e}")
         if errors:
             self.fail("\n".join(errors))
 
@@ -116,9 +116,21 @@ class TestDiffOS(unittest.TestCase, BaseCompareClass):
                 try:
                     self.compare(name)
                 except Exception as e:
-                    errors.append(f"Error accessing files for {name}: {e}")
+                    errors.append(f"Different  files for {name}: {e}")
         if errors:
             self.fail("\n".join(errors))
+
+    def test_fuzz_diff(self):
+        errors = []
+        for i in range(100):
+            with self.subTest(name=i):
+                try:
+                    self.compare(f"fuzz{i}")
+                except Exception as e:
+                    errors.append(f"Different  files for fuzz{i}: {e}")
+        if errors:
+            self.fail("\n".join(errors))
+
 
 if __name__ == '__main__':
     unittest.main()

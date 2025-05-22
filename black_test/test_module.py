@@ -10,7 +10,7 @@ from black_test.Base_test_class import BaseTestClass
 os_name = platform.system()
 
 
-class TestModule(unittest.TestCase, BaseTestClass):
+class TestModule(BaseTestClass):
     def test_module(self):
         test_cases = {
             "collection": [

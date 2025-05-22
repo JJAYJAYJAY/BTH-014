@@ -10,7 +10,7 @@ def generator():
     return a
 
 
-class TestReference(unittest.TestCase, BaseTestClass):
+class TestReference(BaseTestClass):
     def test_reference(self):
         test_cases = {
             "reference": generator(),

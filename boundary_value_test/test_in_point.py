@@ -4,7 +4,7 @@ import unittest
 from black_test.Base_test_class import BaseTestClass
 
 
-class TestInPoint(unittest.TestCase, BaseTestClass):
+class TestInPoint(BaseTestClass):
     def test_in_point(self):
         # 构建相互引用对象
         a, b = {}, {}

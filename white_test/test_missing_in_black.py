@@ -1,8 +1,13 @@
 import platform
+import sys
 import unittest
 
 from black_test.Base_test_class import BaseTestClass
-from lib_pickle.pickle import PickleBuffer
+
+py_ver = f"{sys.version_info.major}.{sys.version_info.minor}"
+
+if sys.version_info >= (3, 8):
+    from lib_pickle.pickle import PickleBuffer
 
 os_name = platform.system()
 
@@ -31,7 +36,7 @@ class MissingStateSetter:
         )
 
 
-class TestMissing(unittest.TestCase, BaseTestClass):
+class TestMissing(BaseTestClass):
     def test_missing1(self):
         """line from 583 to 594"""
         test_cases = {
@@ -61,6 +66,8 @@ class TestMissing(unittest.TestCase, BaseTestClass):
                 self.dump_and_check(val, name)
 
     def test_picklebuffer_missing4(self):
+        if sys.version_info < (3, 8):
+            self.skipTest("PickleBuffer is not available in Python < 3.8")
         """line from 778 to 801"""
         test_cases = {
             "pickleBuffer": PickleBuffer(b"abc")

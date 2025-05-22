@@ -5,7 +5,7 @@ import unittest
 from black_test.Base_test_class import BaseTestClass
 
 
-class TestOffPoint(unittest.TestCase, BaseTestClass):
+class TestOffPoint(BaseTestClass):
     def test_off_point(self):
         errors = []
         deep_list = []

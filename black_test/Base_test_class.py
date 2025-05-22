@@ -2,11 +2,12 @@ import hashlib
 import os
 import platform
 import sys
+import unittest
 
 from lib_pickle import pickle
 
 
-class BaseTestClass:
+class BaseTestClass(unittest.TestCase):
     def dump_and_check(self, value, case_name, protocol=4):
         os_name = platform.system()  # Windows / Linux / Darwin
         py_ver = f"{sys.version_info.major}.{sys.version_info.minor}"

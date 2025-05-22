@@ -6,7 +6,7 @@ from black_test.Base_test_class import BaseTestClass
 os_name = platform.system()
 
 
-class TestContainer(unittest.TestCase, BaseTestClass):
+class TestContainer(BaseTestClass):
     def test_container(self):
         test_cases = {
             "list": [1, 'a', 3, 4, 5, 6],

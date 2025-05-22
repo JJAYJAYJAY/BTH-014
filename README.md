@@ -2,8 +2,8 @@
 
 ## introduction
 
-This project tests the serialization functionality of the `pickle` module under mainstream operating systems including *
-*Linux**, **macOS**, and **Windows**, using Python versions **3.6**, **3.9**, and **3.11**.
+This project tests the serialization functionality of the `pickle` module under mainstream operating systems including
+**Linux**, **macOS**, and **Windows**, using Python versions **3.6**, **3.9**, and **3.11**.
 
 This project uses **conda environments** to manage and test different Python versions.
 

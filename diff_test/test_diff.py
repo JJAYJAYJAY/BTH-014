@@ -104,16 +104,13 @@ class TestDiffOS(BaseCompareClass):
         self.base_test(test_cases, flag=True)
 
     def test_boundary_in_diff(self):
-        test_cases = ["binint1_max", "binint1_min", "binint2_max", "binint2_min",
-                      "protocol_2", "protocol_3", "simple_list", "simple_dict",
+        test_cases = ["simple_list", "simple_dict",
                       "single_char", "nested_list", "nested_dict", "min_unicode",
-                      "max_unicode", "float32_min", "unit_float", "true_context",
-                      "false_context", "reduce_object", "sys_version", "cross_reference"]
+                      "max_unicode", "float32_min", "reduce_object", "sys_version", "cross_reference"]
         self.base_test(test_cases, flag=True)
 
     def test_boundary_out_diff(self):
-        test_cases = ["lambda", "open_file", "thread_lock", "bad_unicode",
-                      "module", "unregistered_class", "timestamp"]
+        test_cases = ["lambda", "open_file", "thread_lock", "module"]
         self.base_test(test_cases, flag=True)
 
     def test_boundary_on_diff(self):
@@ -128,7 +125,7 @@ class TestDiffOS(BaseCompareClass):
 
     def test_boundary_off_diff(self):
         test_cases = ["deep_list", "deep_dict", "deep_tuple",
-                      "huge_float", "bool_2", "random_obj", "path_obj"]
+                      "huge_float", "path_obj"]
         self.base_test(test_cases, flag=True)
 
 

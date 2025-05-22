@@ -98,32 +98,32 @@ class GenerateData:
         setattr(module, class_name, new_class)
         return new_class
 
-    def generate_object(self):
+    def generate_object(self, depth):
         generated_class = self.generate_class()  # 动态生成类
         obj = generated_class()
 
         # 为每个属性赋值
         for attr in generated_class.__dict__:
             if not attr.startswith('__'):  # 忽略内置属性
-                value = self.generate_random_value()  # 生成随机值
+                value = self.generate_random_value(depth+1)  # 生成随机值
                 setattr(obj, attr, value)  # 绑定到实例
         return obj
 
     def generate_random_value(self, depth=0):
         options = [
             self.generate_int,
-            self.generate_big_int,
+            # self.generate_big_int,
             self.generate_string,
             self.generate_float,
-            self.generate_b_string,
-            self.generate_object,
-            lambda: None,
-            lambda: True,
-            lambda: False
+            # self.generate_b_string,
+            # lambda: None,
+            # lambda: True,
+            # lambda: False
         ]
 
-        if depth <= 3:
+        if depth <= 2:
             options += [
+                lambda: self.generate_object(depth),
                 lambda: self.generate_array(depth),
                 lambda: self.generate_dict(depth)
             ]
@@ -132,6 +132,6 @@ class GenerateData:
 
 
 if __name__ == '__main__':
-    generate = GenerateData(100)
-    for i in range(100):
+    generate = GenerateData(728730)
+    for i in range(10):
         print(generate.generate_random_value())

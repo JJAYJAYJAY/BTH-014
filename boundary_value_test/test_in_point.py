@@ -18,8 +18,8 @@ class TestInPoint(BaseTestClass):
             "single_char": "a",
 
             # 正常嵌套结构
-            "nested_list": [[1]],
-            "nested_dict": {"a": {"b": 2}},
+            "nested_list2": [[1]],
+            "nested_dict2": {"a": {"b": 2}},
 
             # Unicode边界
             "min_unicode": "\u0000",

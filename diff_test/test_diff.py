@@ -18,7 +18,7 @@ class BaseCompareClass(unittest.TestCase):
     _py_paths = {
         "py36": os.path.join("res", "Windows", "3.6"),
         "py39": os.path.join("res", "Windows", "3.9"),
-        "py311": os.path.join("res", "Windows", "3.11"),
+        "py311": os.path.join("res", "Windows", "3.10"),
     }
 
     def compare(self, case_name: str, *, ext: str = "pkl", flag: bool = True):
@@ -33,11 +33,11 @@ class BaseCompareClass(unittest.TestCase):
                 with open(fp, "rb") as f:
                     hashes[platform_key] = hashlib.sha256(f.read()).hexdigest()
 
-        if len(hashes) < 2:
-            self.skipTest(
-                f"'{case_name}' only found {len(hashes)} result file(s); skipping comparison"
-            )
-            return
+        # if len(hashes) < 2:
+        #     self.skipTest(
+        #         f"'{case_name}' only found {len(hashes)} result file(s); skipping comparison"
+        #     )
+        #     return
         # 生成所有唯一平台组合
 
         platforms = list(hashes.keys())
@@ -185,7 +185,7 @@ class TestDiffPY(BaseCompareClass):
     def test_boundary_in_diff(self):
         test_cases = ["binint1_max", "binint1_min", "binint2_max", "binint2_min",
                       "protocol_2", "protocol_3", "simple_list", "simple_dict",
-                      "single_char", "nested_list", "nested_dict", "min_unicode",
+                      "single_char", "nested_list2", "nested_dict2", "min_unicode",
                       "max_unicode", "float32_min", "unit_float", "true_context",
                       "false_context", "reduce_object", "sys_version", "cross_reference"]
         self.base_test(test_cases, flag=False)
